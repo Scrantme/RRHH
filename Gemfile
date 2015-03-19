@@ -12,6 +12,11 @@ gem 'pg'
 gem 'therubyracer'
 gem 'haml-rails'
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'thin'
+gem 'turbolinks'
+gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

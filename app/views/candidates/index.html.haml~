@@ -1,42 +1,36 @@
-%h1 Candidatos en base
+.well
+  = form_for_filterrific @filterrific do |f|
+    .row
+      .col-md-3
+        .form-group.chardin_box{ :'data-position' => 'top', :'data-intro' => 'Buscar por nombre, apellido o mail.' }
+          %label Buscar
+          = f.text_field :search_query,
+                         :class => 'filterrific-periodically-observed form-control'
+      .col-md-3
+        .form-group.chardin_box{ :'data-position' => 'top', :'data-intro' => 'Filtrar por perfil.' }
+          %label Perfil
+          = f.select :with_perfil,
+                     @filterrific.select_options[:with_perfil],
+                     { :include_blank => '- Any -' },
+                     { :class => 'form-control' }
+      .col-md-4
+        .form-group.chardin_box{ :'data-position' => 'top', :'data-intro' => 'Cambiar orden.' }
+          %label Sorted by
+          = f.select :sorted_by,
+                     @filterrific.select_options[:sorted_by],
+                     {},
+                     { :class => 'form-control' }
 
-= form_tag candidates_path, :method => :get, :id => 'perfil_form' do
-  Include: 
-  - @all_perfiles.each do |perfil|
-    = perfil
-    = check_box_tag "perfiles[#{perfil}]", 1, @selected_perfiles.include?(perfil), :id => "perfiles_#{perfil}"
-  = submit_tag 'Filtrar', :id => 'perfiles_submit'
-%br
-= button_to 'Nuevo Candidato', new_candidate_path, :class => 'button', :method => :get
-%br
-%table
-  %tr
-    %th Nombre
-    %th Apellido
-    %th Mail
-    %th Celular
-    %th Otros Contactos
-    %th Perfil
-    %th Tecnologia
-    %th Seniority
-    %th Descripcion
-    %th CV
+#results
+  = render :partial => 'candidates/list',
+           :locals => { :candidates => @candidates }
 
-  - @candidates.each do |candidate|
-    %tr
-      %td= candidate.nombre
-      %td= candidate.apellido
-      %td= candidate.mail
-      %td= candidate.celular
-      %td= candidate.otros_contactos
-      %td= candidate.perfil
-      %td= candidate.tecnologia
-      %td= candidate.seniority
-      %td= candidate.descripcion
-      %td= candidate.cv
-      %td= link_to 'Show', candidate
-      %td= link_to 'Edit', edit_candidate_path(candidate)
-      %td= link_to 'Destroy', candidate, :method => :delete, :data => { :confirm => 'Are you sure?' }
+:javascript
+  $('.js-datepicker').datepicker();
+  $('#overlayTrigger').click(function(event) {
+    event.preventDefault();
+    $('body').chardinJs('start');
+  });
 
 
 

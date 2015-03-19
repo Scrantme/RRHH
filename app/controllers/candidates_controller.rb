@@ -2,20 +2,15 @@ class CandidatesController < ApplicationController
   # GET /candidates
   # GET /candidates.json
   def index
-    @all_perfiles = Candidate.all_perfiles
-    @selected_perfiles = params[:perfiles] || session[:perfiles] || {}
-
-        
-    if @selected_perfiles != {} 
-      if params[:perfiles] != session[:perfiles] and params[:perfiles] != {}
-        session[:perfiles] = params[:perfiles]
-      elsif session[:perfiles] != {} and params[:perfiles] == {} 
-        @selected_perfiles == {}
-      end
-      @candidates = Candidate.find_all_by_perfil(@selected_perfiles.keys)
-    else
-      @candidates = Candidate.all
-    end
+    @filterrific = initialize_filterrific(
+      Candidate,
+      params[:filterrific],
+      :select_options => {
+        sorted_by: Candidate.options_for_sorted_by,
+        with_perfil: Candidate.options_for_select
+      }
+    ) or return
+    @candidates = @filterrific.find.page(params[:page])
 
        
     respond_to do |format|

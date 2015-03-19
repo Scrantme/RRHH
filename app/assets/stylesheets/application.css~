@@ -10,13 +10,4 @@
  *
  *= require_self
  *= require_tree .
- *//* Pull in bootstrap */
-@import 'bootstrap';
-
-/* Import any app style files below this line */
-@import 'bootstrap-datepicker3.css';
-
-@import 'components/filterrific_filter';
-@import 'components/chardinjs_overrides.css';
-
-@import 'chardinjs.css';
+ */
