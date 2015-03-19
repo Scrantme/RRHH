@@ -1,0 +1,57 @@
+= form_for @candidate , :html => {:multipart => true} do |f|
+  - if @candidate.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@candidate.errors.count, "error")} prohibited this candidate from being saved:"
+      %ul
+        - @candidate.errors.full_messages.each do |msg|
+          %li= msg
+
+  Nombre:
+  = f.text_field :nombre 
+  %br
+  Apellido:
+  = f.text_field :apellido
+  %br
+  Edad:
+  = f.select :edad , (18..100)
+  %br
+  Mail:
+  = f.text_field :mail
+  %br
+  Celular:
+  = f.text_field :celular 
+  %br
+  Otros Contactos:
+  = f.text_field :otros_contactos 
+  %br
+  Perfil:
+  = f.select :perfil , ['Administrador', 'Auditor', 'Analista BI','Analista de Calidad', 'Analista de Negocios', 'Analista de Organizacion y Metodos', 'Analista de Procesos', 'Analista de Seguridad Informatica', 'Analista Funcional', 'Analista Programador', 'Consultor', 'Coordinador', 'DBA', 'Gerente de Sistemas', 'Jefe de IT', 'Lider de Proyecto', 'Operador', 'Project Manager', 'QA', 'Soporte Tecnico', 'Tester', 'Vendedor IT', 'Arquitecto', 'Analista de Servicios', 'Analista Tecnico']
+  %br
+  Tecnologia:
+  = f.select :tecnologia , ['Java', '.Net', 'COBOL']
+  %br
+  Seniority:
+  = f.select :seniority , ['Jr', 'Ssr', 'Sr']
+  %br
+  Descripcion:
+  = f.text_field :descripcion
+  %br
+  Estado:
+  = f.select :estado , ['Rechazado por remuneracion', 'Rechazado por zona', 'No le intereso la propuesta', 'Enviado']
+  %br
+  CV Recibido:
+  = f.date_select :fecha_ingreso_cv
+  %br
+  CV Revisado:
+  = f.date_select :fecha_revisado_cv
+  %br
+  Fecha Entrevistado:
+  = f.date_select :fecha_entrevistado
+  %br
+  %br
+  CV:
+  = f.file_field :cv
+  %br
+
+  .actions
+    = f.submit 'Save'

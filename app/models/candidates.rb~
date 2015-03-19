@@ -1,0 +1,5 @@
+class Candidate < ActiveRecord::Base
+  # attr_accessible :title, :body
+  attr_accessible :name, :last_name, :profile, :technology, :seniority, :description, :interview_date
+
+end

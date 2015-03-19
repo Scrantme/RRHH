@@ -1,0 +1,42 @@
+%h1 Candidatos en base
+
+= form_tag candidates_path, :method => :get, :id => 'perfil_form' do
+  Include: 
+  - @all_perfiles.each do |perfil|
+    = perfil
+    = check_box_tag "perfiles[#{perfil}]", 1, @selected_perfiles.include?(perfil), :id => "perfiles_#{perfil}"
+  = submit_tag 'Filtrar', :id => 'perfiles_submit'
+%br
+= button_to 'Nuevo Candidato', new_candidate_path, :class => 'button', :method => :get
+%br
+%table
+  %tr
+    %th Nombre
+    %th Apellido
+    %th Mail
+    %th Celular
+    %th Otros Contactos
+    %th Perfil
+    %th Tecnologia
+    %th Seniority
+    %th Descripcion
+    %th CV
+
+  - @candidates.each do |candidate|
+    %tr
+      %td= candidate.nombre
+      %td= candidate.apellido
+      %td= candidate.mail
+      %td= candidate.celular
+      %td= candidate.otros_contactos
+      %td= candidate.perfil
+      %td= candidate.tecnologia
+      %td= candidate.seniority
+      %td= candidate.descripcion
+      %td= candidate.cv
+      %td= link_to 'Show', candidate
+      %td= link_to 'Edit', edit_candidate_path(candidate)
+      %td= link_to 'Destroy', candidate, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+

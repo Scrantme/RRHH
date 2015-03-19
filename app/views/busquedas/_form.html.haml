@@ -1,0 +1,10 @@
+= form_for @busqueda do |f|
+  - if @busqueda.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@busqueda.errors.count, "error")} prohibited this busqueda from being saved:"
+      %ul
+        - @busqueda.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

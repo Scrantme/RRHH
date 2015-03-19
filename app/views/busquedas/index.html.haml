@@ -1,0 +1,17 @@
+%h1 Listing busquedas
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @busquedas.each do |busqueda|
+    %tr
+      %td= link_to 'Show', busqueda
+      %td= link_to 'Edit', edit_busqueda_path(busqueda)
+      %td= link_to 'Destroy', busqueda, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Busqueda', new_busqueda_path
